@@ -1,6 +1,8 @@
 const pg = require("pg");
+// const dotenv = require("dotenv");
+require("dotenv").config();
 
-const localConnection = "postgresql://localhost/african-marketplace";
+const localConnection = process.env.localConnectionpwd;
 
 let connection;
 
