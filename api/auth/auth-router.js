@@ -8,6 +8,7 @@ const Users = require("./auth-model");
 
 const {
   isValidRegister,
+  isValidLogin,
   isUnique,
 } = require("./../middleware/credentials-test");
 
@@ -27,6 +28,23 @@ router.post("/register", isValidRegister, isUnique, (req, res) => {
     });
 });
 
+router.post("/login", isValidLogin, (req, res) => {
+  const { user_email, user_password } = req.body;
+
+  Users.findByEmail(user_email)
+    .then((user) => {
+      if (user && bcryptjs.compareSync(user_password, user.user_password)) {
+        const token = generateToken(user);
+        res.status(200).json({ message: "welcome", token });
+      } else {
+        res.status(401).json({ message: "invalid credentials" });
+      }
+    })
+    .catch((err) => {
+      return res.status(500).json({ error: err });
+    });
+});
+
 router.get("/users", (req, res) => {
   Users.findAll()
     .then((users) => {
@@ -36,5 +54,17 @@ router.get("/users", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+function generateToken(user) {
+  const payload = {
+    subject: user.user_id,
+    email: user.user_email,
+    role: user.role,
+  };
+  const options = {
+    expiresIn: 1000 * 60,
+  };
+  return jwt.sign(payload, jwtSecret, options);
+}
 
 module.exports = router;
