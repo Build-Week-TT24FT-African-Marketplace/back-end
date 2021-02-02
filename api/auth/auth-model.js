@@ -1,9 +1,17 @@
 const db = require("../data/db-config");
 
 module.exports = {
-  findByEmail,
+  add,
+  findAll,
 };
 
-async function findByEmail(email) {
-  return await db("users").where("email", email);
+async function findAll() {
+  const users = await db("users");
+  return users;
+}
+
+async function add(user) {
+  const id = await db("users").insert(user);
+
+  return id;
 }
