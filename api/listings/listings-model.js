@@ -2,8 +2,13 @@ const db = require("../data/db-config");
 
 module.exports = {
   getAll,
+  add,
 };
 
 async function getAll() {
-  return db("listings");
+  return await db("listings");
+}
+
+async function add(listing) {
+  return await db("listings").insert(listing);
 }
