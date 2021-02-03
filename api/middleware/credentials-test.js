@@ -27,7 +27,7 @@ async function isUnique(req, res, next) {
   if (!returnedUser) {
     return next();
   } else {
-    return res.status(400).json("email taken");
+    return res.status(400).json({ error: "email taken" });
   }
 }
 
