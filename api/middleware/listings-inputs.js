@@ -31,7 +31,7 @@ async function validateListing(req, res, next) {
 }
 
 async function validateId(req, res, next) {
-  const { listing_id } = req.body;
+  const { listing_id } = req.params;
   if (!listing_id) {
     return res.status(400).json({ message: "Please provide a valid ID" });
   }

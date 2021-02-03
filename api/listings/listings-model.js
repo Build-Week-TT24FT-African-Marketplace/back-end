@@ -3,6 +3,8 @@ const db = require("../data/db-config");
 module.exports = {
   getAll,
   add,
+  findById,
+  edit,
 };
 
 async function getAll() {
@@ -11,4 +13,19 @@ async function getAll() {
 
 async function add(listing) {
   return await db("listings").insert(listing);
+}
+
+async function findById(listing_id) {
+  return await db("listings").where("listing_id", listing_id).first();
+}
+
+async function edit(listing_data, listing_id) {
+  return await db("listings")
+    .update(listing_data)
+    .where("listing_id", listing_id)
+    .then((message) => {
+      if (message) {
+        return db("listings").where("listing_id", listing_id).first();
+      }
+    });
 }

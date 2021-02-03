@@ -6,6 +6,7 @@ const {
   validateListing,
   validateId,
 } = require("../middleware/listings-inputs");
+
 const { verifyAuth } = require("../middleware/restricted");
 
 const Listings = require("../listings/listings-model");
@@ -31,16 +32,22 @@ router.post("/", verifyAuth, validateListing, (req, res) => {
     });
 });
 
-router.put("/:id", verifyAuth, validateId, validateListing, (req, res) => {
-  const listing = req.body;
-  res.status(200).json({ message: "great job!" });
-  // Listings.edit(listing)
-  //   .then((listing) => {
-  //     res.status(201).json(listing);
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).json({ error: err });
-  //   });
-});
+router.put(
+  "/:listing_id",
+  verifyAuth,
+  validateId,
+  validateListing,
+  (req, res) => {
+    const { listing_id } = req.params;
+    const listing = req.body;
+    Listings.edit(listing, listing_id)
+      .then((listing) => {
+        res.status(201).json(listing);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
+  }
+);
 
 module.exports = router;
