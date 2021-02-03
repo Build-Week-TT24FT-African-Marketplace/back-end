@@ -25,8 +25,8 @@ router.get("/", verifyAuth, (req, res) => {
 router.post("/", verifyAuth, validateListing, (req, res) => {
   const listing = req.body;
   Listings.add(listing)
-    .then((listing) => {
-      res.status(201).json(listing);
+    .then((listings) => {
+      res.status(201).json(listings);
     })
     .catch((err) => {
       res.status(500).json({ error: err });
@@ -42,8 +42,8 @@ router.put(
     const { listing_id } = req.params;
     const listing = req.body;
     Listings.edit(listing, listing_id)
-      .then((listing) => {
-        res.status(201).json(listing);
+      .then((listings) => {
+        res.status(201).json(listings);
       })
       .catch((err) => {
         res.status(500).json({ error: err });

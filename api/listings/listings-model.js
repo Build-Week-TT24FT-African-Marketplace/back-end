@@ -13,7 +13,13 @@ async function getAll() {
 }
 
 async function add(listing) {
-  return await db("listings").insert(listing);
+  return await db("listings")
+    .insert(listing)
+    .then((message) => {
+      if (message) {
+        return db("listings");
+      }
+    });
 }
 
 async function findById(listing_id) {
@@ -26,7 +32,7 @@ async function edit(listing_data, listing_id) {
     .where("listing_id", listing_id)
     .then((message) => {
       if (message) {
-        return db("listings").where("listing_id", listing_id).first();
+        return db("listings");
       }
     });
 }
