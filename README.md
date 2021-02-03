@@ -130,6 +130,9 @@ Returns json data regarding all active projects including new project.
 - **Success Response:**
 
   - **Code:** 201<br />
+    **Content:**
+
+    `[ { listing }, { listing }, ... ]`
 
 - **Error Response:**
 
@@ -165,6 +168,9 @@ Returns JSON data regarding success/error: on success returns entire /listings a
 - **Success Response:**
 
   - **Code:** 201<br />
+    **Content:**
+
+    `[ { listing }, { listing }, ... ]`
 
 - **Error Response:**
 
