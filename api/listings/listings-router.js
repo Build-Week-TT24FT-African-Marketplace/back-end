@@ -55,7 +55,7 @@ router.delete("/:listing_id", verifyAuth, validateId, (req, res) => {
   const { listing_id } = req.params;
   Listings.remove(listing_id)
     .then((response) => {
-      res.status(201).json(response);
+      res.status(201).json({ "deleted listing": response });
     })
     .catch((err) => {
       res.status(500).json({ error: err });

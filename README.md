@@ -154,7 +154,7 @@ Returns JSON data regarding success/error: on success returns entire /listings a
 
 - **Method:**
 
-  `POST`
+  `PUT`
 
 - **BODY Params**
 
@@ -165,6 +165,44 @@ Returns JSON data regarding success/error: on success returns entire /listings a
 - **Success Response:**
 
   - **Code:** 201<br />
+
+- **Error Response:**
+
+- **Code:** 500 SERVER ERROR <br />
+  **Content:** `{ error: err }`
+
+  OR
+
+- **Code:** 401 UNAUTHORIZED <br />
+  **Content--Invalid token:** `{ error: "token invalid" }`
+  **Content--No token provided:** `{ error: "token required" }`
+
+## **Delete a Listing**
+
+---
+
+Returns JSON data regarding success/error: on success returns entire /listings array
+
+- **URL**
+
+  https://african-marketplace-backend-24.herokuapp.com/api/listings/:listing_id
+
+- **Method:**
+
+  `DELETE`
+
+- **BODY Params**
+
+**Required:**
+
+`valid listing_id in URL params`
+
+- **Success Response:**
+
+  - **Code:** 201<br />
+    **Content:**
+
+    `{ "deleted listing": { ...listing } }`
 
 - **Error Response:**
 
