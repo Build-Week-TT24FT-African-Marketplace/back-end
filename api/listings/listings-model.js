@@ -5,6 +5,7 @@ module.exports = {
   add,
   findById,
   edit,
+  remove,
 };
 
 async function getAll() {
@@ -27,5 +28,16 @@ async function edit(listing_data, listing_id) {
       if (message) {
         return db("listings").where("listing_id", listing_id).first();
       }
+    });
+}
+
+async function remove(listing_id) {
+  const targetListing = await db("listings").where("listing_id", listing_id);
+
+  return await db("listings")
+    .where("listing_id", listing_id)
+    .del()
+    .then(() => {
+      return targetListing;
     });
 }
