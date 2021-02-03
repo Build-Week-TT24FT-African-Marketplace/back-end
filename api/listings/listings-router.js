@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   validateListing,
+  validateEditListing,
   validateId,
 } = require("../middleware/listings-inputs");
 
@@ -36,7 +37,7 @@ router.put(
   "/:listing_id",
   verifyAuth,
   validateId,
-  validateListing,
+  validateEditListing,
   (req, res) => {
     const { listing_id } = req.params;
     const listing = req.body;

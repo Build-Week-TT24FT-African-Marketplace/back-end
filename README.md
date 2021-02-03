@@ -1,11 +1,12 @@
 # back-end
+
 ## **Sign Up**
 
 Returns json data about a register event.
 
 - **URL**
 
- https://african-marketplace-backend-24.herokuapp.com/api/auth/register/
+https://african-marketplace-backend-24.herokuapp.com/api/auth/register/
 
 - **Method:**
 
@@ -30,7 +31,7 @@ Returns json data about a register event.
 
   - **Code:** 400 UNAUTHORIZED <br />
     **Content:** `{ error : "email taken" OR "Missing credentials email or password." }`
-`
+    `
 
 ## **LOGIN**
 
@@ -40,7 +41,7 @@ Returns JSON data about a login event and token upon success.
 
 - **URL**
 
-   https://african-marketplace-backend-24.herokuapp.com/api/auth/register/
+  https://african-marketplace-backend-24.herokuapp.com/api/auth/register/
 
 - **Method:**
 
@@ -106,7 +107,6 @@ Returns json data regarding all active projects.
 
 - **Sample Call:**
 
-
 ## **Create a Listing**
 
 ---
@@ -133,11 +133,46 @@ Returns json data regarding all active projects including new project.
 
 - **Error Response:**
 
-  - **Code:** 500 SERVER ERROR <br />
-    **Content:** `{ error: err }`
+- **Code:** 500 SERVER ERROR <br />
+  **Content:** `{ error: err }`
 
   OR
 
-   - **Code:** 401 UNAUTHORIZED <br />
-    **Content--Invalid token:** `{ error: "token invalid" }`
-    **Content--No token provided:** `{ error: "token required" }`
+- **Code:** 401 UNAUTHORIZED <br />
+  **Content--Invalid token:** `{ error: "token invalid" }`
+  **Content--No token provided:** `{ error: "token required" }`
+
+## **Edit a Listing**
+
+---
+
+Returns JSON data regarding success/error: on success returns entire /listings array
+
+- **URL**
+
+  https://african-marketplace-backend-24.herokuapp.com/api/listings/:listing_id
+
+- **Method:**
+
+  `POST`
+
+- **BODY Params**
+
+**Required:**
+
+`{ listing_name, listing_description, listing_price, marketplace_id }`
+
+- **Success Response:**
+
+  - **Code:** 201<br />
+
+- **Error Response:**
+
+- **Code:** 500 SERVER ERROR <br />
+  **Content:** `{ error: err }`
+
+  OR
+
+- **Code:** 401 UNAUTHORIZED <br />
+  **Content--Invalid token:** `{ error: "token invalid" }`
+  **Content--No token provided:** `{ error: "token required" }`
