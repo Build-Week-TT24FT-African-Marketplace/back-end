@@ -12,7 +12,7 @@ const { verifyAuth } = require("../middleware/restricted");
 
 const Listings = require("../listings/listings-model");
 
-router.get("/", verifyAuth, (req, res) => {
+router.get("/", (req, res) => {
   Listings.getAll()
     .then((listings) => {
       res.status(200).json(listings);
