@@ -33,9 +33,19 @@ router.post("/login", isValidLogin, (req, res) => {
 
   Users.findByEmail(user_email)
     .then((user) => {
+      const { user_id, user_first_name, user_email, role } = user;
       if (user && bcryptjs.compareSync(user_password, user.user_password)) {
         const token = generateToken(user);
-        res.status(200).json({ message: "welcome", token });
+        res
+          .status(200)
+          .json({
+            message: "welcome",
+            token,
+            user_id,
+            user_first_name,
+            user_email,
+            role,
+          });
       } else {
         res.status(401).json({ message: "invalid credentials" });
       }
